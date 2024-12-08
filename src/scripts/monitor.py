@@ -17,8 +17,7 @@ def load_updated_data():
     pd.DataFrame
         The modified sample data with 'Class' set to 1.
     """
-    sample_data = read_file(config["FILES"]["GCS_BUCKET_NAME"],
-                            config["FILES"]["SAMPLE_GCS_FILE_NAME"])
+    sample_data = read_file(config["FILES"]["SAMPLE_FILE"])
     sample_data["Class"] = 1  # Change target in order to drop down the recall and test retraining new model
     return sample_data
 

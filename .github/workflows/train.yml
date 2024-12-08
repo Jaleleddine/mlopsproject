@@ -1,0 +1,31 @@
+name: train model
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  train_model_job:
+    name: train model first time
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: train the model
+        run: |
+          python src/scripts/train_model.py --configuration configuration.ini --retrain false
+
+      - name: upload model artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: trained-model
+          path: src/model/fraud_detection_model.pkl
+
+

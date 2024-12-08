@@ -108,11 +108,9 @@ def main(args):
     retrain = args.retrain
 
     if retrain == "false":
-        data_transformed = process_data(config["FILES"]["GCS_BUCKET_NAME"],
-                                        config["FILES"]["GCS_FILE_NAME"])
+        data_transformed = process_data(config["FILES"]["FILE"])
     if retrain == "true":
-        data_transformed = process_data(config["FILES"]["GCS_BUCKET_NAME"],
-                                        config["FILES"]["SAMPLE_GCS_FILE_NAME"])
+        data_transformed = process_data(config["FILES"]["SAMPLE_FILE"])
 
     model,pca = fit_model(data_transformed)
     recall, precision, f1s = evaluate_model(model,pca, data_transformed)
