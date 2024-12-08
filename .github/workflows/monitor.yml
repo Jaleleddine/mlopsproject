@@ -16,21 +16,21 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
 
-      - name: Check file permissions
-        run: |
-          chmod +w src/monitoring_output/monitor.txt
-          ls -l src/monitoring_output/monitor.txt
+#     - name: Check file permissions
+#        run: |
+#        chmod +w src/monitoring_outputs/modelmonitor.txt
+#        ls -l src/monitoring_outputs/modelmonitor.txt
 
 
       - name: run monitoring script to check performance
         run: |
           python src/scripts/monitor.py --configuration configuration.ini
       
-      - name: read monitor.txt
+      - name: read modelmonitor.txt
         run: |
-          MONITOR_READ=$(cat src/monitoring_output/monitor.txt)
+          MONITOR_READ=$(cat src/monitoring_outputs/modelmonitor.txt)
           echo "MONITOR_STATUS=${MONITOR_READ}" >> $GITHUB_ENV
-          echo "value added to monitor.txt file and added to github env variables"
+          echo "value added to modelmonitor.txt file and added to github env variables"
 
       - name: decision
         run: |
