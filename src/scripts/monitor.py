@@ -73,6 +73,7 @@ def monitor(config):
     file_name = "modelmonitor.txt"
     file_path = os.path.join(monitoring_path, file_name)
     os.makedirs(monitoring_path, exist_ok=True)
+    os.chmod(file_path, 0o666)
     
     
     try: 
@@ -80,7 +81,8 @@ def monitor(config):
         with open(file_path, 'w') as file:
             if recall < float(config["MONITOR"]["RECALL_THRESHOLD"]):
                 print("--------------------- first bad condition ---------------")
-                file.write("retrain")
+                #file.write("retrain")
+                print("retrain", file=file)
                 print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!write done!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             else:
                 print("--------------------- second good condition ---------------")
