@@ -20,14 +20,17 @@ jobs:
       - name: run monitoring script to check performance
         run: |
           python src/scripts/monitor.py --configuration configuration.ini
-
+      
+      - name: Check file permissions
+        run: |
+          chmod +w src/monitoring_output/monitor.txt
+          ls -l src/monitoring_output/monitor.txt
 
       - name: read monitor.txt
         run: |
           MONITOR_READ=$(cat src/monitoring_output/monitor.txt)
           echo "MONITOR_STATUS=${MONITOR_READ}" >> $GITHUB_ENV
           echo "value added to monitor.txt file and added to github env variables"
-
 
       - name: decision
         run: |
