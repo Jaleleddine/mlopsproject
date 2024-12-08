@@ -59,14 +59,24 @@ def monitor(config):
     recall = recall_score(y_true, y_pred)
 
     # Send decision to retrain or not, truncate it each time
-    with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
+    """     with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
         if recall < float(config["MONITOR"]["RECALL_THRESHOLD"]):
             print("---------------------first bad condition ---------------")
             print("name=========================================="+file.name)
             file.write("retrain new model")
         else:
             print("--------------------- second good condition ---------------")
-            file.write("keep existing model") 
+            file.write("keep existing model")  """
+    try: 
+        with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
+            if recall < float(config["MONITOR"]["RECALL_THRESHOLD"]):
+                print("--------------------- first bad condition ---------------")
+                file.write("retrain new model")
+            else:
+                print("--------------------- second good condition ---------------")
+                file.write("keep existing model") 
+    except Exception as e:
+        print(f"Error while writing to the file: {e}")
 
 
 if __name__ == "__main__":
