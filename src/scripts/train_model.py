@@ -6,7 +6,7 @@ from sklearn.decomposition import PCA
 
 from process_data import process_data
 from utils import get_config, parse_args
-
+import os
 
 def fit_model(data_transformed):
     """
@@ -92,6 +92,10 @@ def save_model(model, model_path):
     model_path : str
         The model file path it will be saved.
     """
+    # Check if directory exists
+    dir_name = os.path.dirname(model_path)
+    if not os.path.exists(dir_name):
+        print(f"Directory does not exist: {dir_name}") 
     joblib.dump(model, model_path)
 
 
