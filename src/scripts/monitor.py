@@ -1,9 +1,10 @@
+import os
 import joblib
 from sklearn.metrics import recall_score
 
 from process_data import transform_data, read_file
 from utils import get_config, parse_args
-
+import datetime
 
 def load_updated_data():
     """
@@ -67,8 +68,16 @@ def monitor(config):
         else:
             print("--------------------- second good condition ---------------")
             file.write("keep existing model")  """
+    
+    monitoring_path = config["FILES"]["MONITORING_PATH"]    
+    file_name = "modelmonitor.txt"
+    file_path = os.path.join(monitoring_path, file_name)
+    os.makedirs(monitoring_path, exist_ok=True)
+    
+    
     try: 
-        with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
+        #with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
+        with open(file_path, 'w') as file:
             if recall < float(config["MONITOR"]["RECALL_THRESHOLD"]):
                 print("--------------------- first bad condition ---------------")
                 file.write("retrain")
