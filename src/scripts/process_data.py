@@ -7,7 +7,7 @@ from io import StringIO
 sns.set_theme(style="whitegrid")
 
 
-def read_file(gcs_bucket_name, gcs_filename):
+def read_file(file):
     """
     Read a CSV file from GCP storage bucket.
     This function connects to Google Cloud Storage, extract the specified CSV file,
@@ -25,11 +25,12 @@ def read_file(gcs_bucket_name, gcs_filename):
     pd.DataFrame
         The contents of "credictcard.csv".
     """
-    storage_client = storage.Client()
+
+    """ storage_client = storage.Client()
     bucket = storage_client.bucket(gcs_bucket_name)
     blob = bucket.blob(gcs_filename)
     csv_content = blob.download_as_text()
-    file = StringIO(csv_content)
+    file = StringIO(csv_content) """
     data = pd.read_csv(file, sep=",")
     return data
 
@@ -96,7 +97,7 @@ def transform_data(data):
     return data_transformed
 
 
-def process_data(gcs_bucket_name, gcs_filename):
+def process_data(file):
     """
     Process the transaction data by reading from Google Cloud Storage and transforming it.
 
@@ -112,7 +113,7 @@ def process_data(gcs_bucket_name, gcs_filename):
     pd.DataFrame
         The transformed DataFrame ready for modeling.
     """
-    data = read_file(gcs_bucket_name, gcs_filename)
+    data = read_file(file)
     # data_info, data_describe, data_class_frequency = explore_data(data)  # Uncomment if exploration is needed
     data_transformed = transform_data(data)
     return data_transformed
