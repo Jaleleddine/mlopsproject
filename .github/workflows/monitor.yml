@@ -16,16 +16,16 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
 
-
-      - name: run monitoring script to check performance
-        run: |
-          python src/scripts/monitor.py --configuration configuration.ini
-      
       - name: Check file permissions
         run: |
           chmod +w src/monitoring_output/monitor.txt
           ls -l src/monitoring_output/monitor.txt
 
+
+      - name: run monitoring script to check performance
+        run: |
+          python src/scripts/monitor.py --configuration configuration.ini
+      
       - name: read monitor.txt
         run: |
           MONITOR_READ=$(cat src/monitoring_output/monitor.txt)
