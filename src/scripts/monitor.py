@@ -71,10 +71,12 @@ def monitor(config):
         with open(config["FILES"]["MONITORING_PATH"], 'w') as file:
             if recall < float(config["MONITOR"]["RECALL_THRESHOLD"]):
                 print("--------------------- first bad condition ---------------")
-                file.write("retrain new model")
+                file.write("retrain")
+                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!write done!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             else:
                 print("--------------------- second good condition ---------------")
-                file.write("keep existing model") 
+                file.write("keep existing model")
+                print("???????????????????????????????????write done???????????????????????") 
     except Exception as e:
         print(f"Error while writing to the file: {e}")
 
