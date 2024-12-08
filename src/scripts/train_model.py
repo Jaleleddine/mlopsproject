@@ -119,7 +119,7 @@ def main(args):
     model,pca = fit_model(data_transformed)
     recall, precision, f1s = evaluate_model(model,pca, data_transformed)
     print(recall, precision)
-    save_model(model, config["FILES"]["MODEL_PATH"])
+    #save_model(model, config["FILES"]["MODEL_PATH"])
 
 
 if __name__ == "__main__":
