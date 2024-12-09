@@ -39,8 +39,7 @@ so we proceed with the current model configuration.
 ### Install Dependencies
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/mahmoudalbardan/FraudDetectionMLOps.git
-cd FraudDetectionMLOps
+git clone https://github.com/Jaleleddine/mlopsproject.git
 pip install -r requirements.txt
 ```
 
